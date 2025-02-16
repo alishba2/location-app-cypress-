@@ -6,7 +6,7 @@ import Navbar from "../components/Navbar";
 import { fetchRestaurants, Restaurant } from "../lib/api";
 import useLocation from "../lib/useLocation";
 import Hero from "../components/Hero";
-// import { Heart } from "lucide-react";
+import { Heart } from "lucide-react";
 
 export default function RestaurantListPage() {
   const { position, address, mapUrl } = useLocation();
@@ -49,6 +49,7 @@ export default function RestaurantListPage() {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {restaurants.map((restaurant, index) => (
               <div
+                data-test="restaurant-card"
                 key={index}
                 className="bg-white rounded-2xl shadow-lg overflow-hidden transition-transform hover:scale-105"
               >
@@ -63,13 +64,13 @@ export default function RestaurantListPage() {
                     {restaurant.deliveryTime} MIN
                   </span>
                   <button className="absolute top-2 right-2 bg-white p-1 rounded-full shadow">
-                    {/* <Heart className="w-5 h-5 text-gray-600" /> */}
+                    <Heart className="w-5 h-5 text-gray-600" />
                   </button>
                 </div>
 
                 {/* Content Section */}
                 <div className="p-4 sm:p-5">
-                  <h3 className="text-lg font-bold truncate">
+                  <h3 className="text-lg font-bold truncate ">
                     {restaurant.name}
                   </h3>
                   <p className="text-sm text-gray-500 truncate">
@@ -81,7 +82,7 @@ export default function RestaurantListPage() {
                       ★ {restaurant.rating}/5
                     </span>
                     <span className="text-gray-800 font-semibold">
-                      €{restaurant.minimumOrder} Min
+                      ${restaurant.minimumOrder} Min
                     </span>
                   </div>
                 </div>

@@ -57,12 +57,6 @@ export default function Hero() {
     }
   }, [position, apiKey]);
 
-  // const { restaurants, loading, error, loadRestaurants } = useRestaurants(
-  //   position ? position.lat : null,
-  //   position ? position.lng : null
-  // );
-
-  // On click, navigate to /restaurant-list
   const handleFindRestaurants = () => {
     router.push("/restaurant-list");
   };
@@ -79,14 +73,12 @@ export default function Hero() {
           }}
         />
 
-        {/* Search Box Container */}
         <div className="relative z-10 w-[90%] max-w-3xl bg-[#0F172A] p-2 rounded-md shadow-lg flex flex-col sm:flex-row items-center gap-2">
-          {/* Address Input */}
           <div className="flex items-center justify-between w-full bg-white rounded-md shadow-md px-4 py-2 border border-gray-200">
-            {/* Location Icon & Input */}
             <div className="flex items-center flex-grow">
               <FaMapMarkerAlt className="text-gray-500 mr-2 text-lg" />
               <input
+                data-test="search-bar"
                 type="text"
                 placeholder="Enter Delivery Address"
                 className="w-full bg-transparent border-none outline-none text-gray-700 placeholder-gray-400 text-sm"
@@ -95,15 +87,14 @@ export default function Hero() {
               />
             </div>
 
-            {/* Share Location Button */}
             <button className="flex items-center gap-2 px-4 py-1 text-gray-600 text-sm font-medium rounded-full hover:bg-gray-100 transition">
               <IoMdLocate className="text-gray-500 text-lg" />
               <span className="hidden sm:inline">Share Location</span>
             </button>
           </div>
 
-          {/* Find Restaurants Button */}
           <button
+            data-test="find-restaurants-button"
             className="ml-2 px-6 py-3 bg-green-500 text-white font-medium rounded-full  text-sm hover:bg-green-600 transition whitespace-nowrap mt-2 sm:mt-0"
             onClick={handleFindRestaurants}
           >
