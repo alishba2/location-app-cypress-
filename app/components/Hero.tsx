@@ -16,6 +16,7 @@ export default function Hero() {
   const [position, setPosition] = useState<Position | null>(null);
   const [address, setAddress] = useState<string>("");
   const [mapUrl, setMapUrl] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -29,9 +30,11 @@ export default function Hero() {
       navigator.geolocation.getCurrentPosition(
         (pos: GeolocationPosition) => {
           setPosition({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+          setLoading(false);
         },
         (error: GeolocationPositionError) => {
           console.error("Error obtaining location:", error);
+          setLoading(false);
         }
       );
     }
@@ -89,7 +92,9 @@ export default function Hero() {
 
             <button className="flex items-center gap-2 px-4 py-1 text-gray-600 text-sm font-medium rounded-full hover:bg-gray-100 transition">
               <IoMdLocate className="text-gray-500 text-lg" />
-              <span className="hidden sm:inline">Share Location</span>
+              <span className="hidden sm:inline">
+                {loading ? "Loading..." : "Share Location"}
+              </span>
             </button>
           </div>
 
@@ -97,6 +102,7 @@ export default function Hero() {
             data-test="find-restaurants-button"
             className="ml-2 px-6 py-3 bg-green-500 text-white font-medium rounded-full  text-sm hover:bg-green-600 transition whitespace-nowrap mt-2 sm:mt-0"
             onClick={handleFindRestaurants}
+            disabled={loading}
           >
             Find Restaurants
           </button>
