@@ -3,6 +3,7 @@
 import { useState } from "react";
 import useLocation from "../lib/useLocation";
 import { FaShoppingBag, FaBars, FaTimes } from "react-icons/fa";
+import { FaMapMarkerAlt } from "react-icons/fa";
 
 export default function Navbar() {
   const { address } = useLocation();
@@ -17,7 +18,10 @@ export default function Navbar() {
         {/* Center - Location Selector (only on desktop) */}
         <div className="hidden md:flex flex-1 justify-center">
           <button className="flex items-center text-gray-600 text-sm hover:text-black transition">
-            <span className="mr-1">📍</span>
+            <span className="mr-1">
+              <FaMapMarkerAlt className="text-gray-500 mr-2 text-lg" />
+            </span>
+
             {address || "Loading..."}
             <span className="ml-1">▼</span>
           </button>

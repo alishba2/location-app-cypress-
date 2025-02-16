@@ -67,7 +67,6 @@ describe("End-to-End Flow", () => {
       }
     ).as("graphql");
 
-    // 3. Intercept reverse-geocoding
     cy.intercept("GET", "https://maps.googleapis.com/maps/api/geocode/json*", {
       status: "OK",
       results: [
@@ -77,25 +76,19 @@ describe("End-to-End Flow", () => {
       ],
     }).as("reverseGeocode");
 
-    // Wait for configuration to load
     cy.wait("@graphql");
 
-    // Wait for reverse-geocoding
     cy.wait("@reverseGeocode");
 
-    // Check the address is displayed
     cy.get('[data-test="search-bar"]').should(
       "have.value",
       "Test Address, Islamabad, Pakistan"
     );
 
-    // Trigger restaurant query
     cy.get('[data-test="find-restaurants-button"]').click();
 
-    // Wait for restaurant list to come back
     cy.wait("@graphql");
 
-    // Check the restaurant is displayed
     cy.get('[data-test="restaurant-card"]', { timeout: 10000 }).should(
       "contain.text",
       "Test Resutaurant"
